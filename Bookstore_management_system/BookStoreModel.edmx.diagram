@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="78570015397440ed89a333819f6e7452" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="BookShopModel.category" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.discount_type" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.exportproduct" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.importproduct" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.orderdetail" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.payment_methods" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.product" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.role" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.shift" Width="1.5" PointX="1.5" PointY="20.875" IsExpanded="true" />
+        <AssociationConnector Association="BookShopModel.fk_product_category" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK__ExportPro__produ__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK__ImportPro__produ__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK__orderdeta__produ__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_orderdetails_payments" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BookShopModel.orderp" Width="1.5" PointX="9.5" PointY="17.875" />
+        <AssociationConnector Association="BookShopModel.FK__orderdeta__order__09A971A2" />
+        <EntityTypeShape EntityType="BookShopModel.customer" Width="1.5" PointX="0.75" PointY="11.75" />
+        <AssociationConnector Association="BookShopModel.FK_orderp_customer" />
+        <EntityTypeShape EntityType="BookShopModel.staff" Width="1.5" PointX="3.75" PointY="18.25" />
+        <AssociationConnector Association="BookShopModel.FK__orderp__staffid__06CD04F7" />
+        <AssociationConnector Association="BookShopModel.FK__staff__role_id__02FC7413" />
+        <AssociationConnector Association="BookShopModel.FK__staff__shift_id__03F0984C" />
+        <EntityTypeShape EntityType="BookShopModel.bookshelf" Width="1.5" PointX="14.125" PointY="7" />
+        <EntityTypeShape EntityType="BookShopModel.shelfmanage" Width="1.5" PointX="8.25" PointY="3.375" />
+        <AssociationConnector Association="BookShopModel.FK_Bookshelf" />
+        <AssociationConnector Association="BookShopModel.FK_Product" />
+        <EntityTypeShape EntityType="BookShopModel.discount" Width="1.5" PointX="5.25" PointY="5.25" />
+        <AssociationConnector Association="BookShopModel.FK__Discount__custom__73BA3083" />
+        <AssociationConnector Association="BookShopModel.FK__Discount__discou__74AE54BC" />
+        <AssociationConnector Association="BookShopModel.FK__Discount__produc__72C60C4A" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

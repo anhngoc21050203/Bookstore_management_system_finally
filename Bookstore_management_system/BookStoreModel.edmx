@@ -1,0 +1,1149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BookShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bookshelf">
+          <Key>
+            <PropertyRef Name="shelfid" />
+          </Key>
+          <Property Name="shelfid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shelfname" Type="nvarchar" MaxLength="50" />
+          <Property Name="shelfdescription" Type="nvarchar(max)" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="update_by" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="updated_by" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerid" />
+          </Key>
+          <Property Name="customerid" Type="int" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="10" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
+          <Property Name="point" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="returncount" Type="int" />
+          <Property Name="datein" Type="datetime" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="discount_id" />
+          </Key>
+          <Property Name="discount_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="min_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="apply_count" Type="int" />
+          <Property Name="discount_amount" Type="decimal" Precision="3" Scale="3" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="50" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="updated_by" Type="nvarchar" MaxLength="50" />
+          <Property Name="discount_type_id" Type="int" />
+          <Property Name="start_date" Type="date" />
+          <Property Name="end_date" Type="date" />
+          <Property Name="condition" Type="nvarchar(max)" />
+          <Property Name="note" Type="nvarchar" MaxLength="50" />
+          <Property Name="out_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="discount_type">
+          <Key>
+            <PropertyRef Name="discount_type_id" />
+          </Key>
+          <Property Name="discount_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="exportproduct">
+          <Key>
+            <PropertyRef Name="exportid" />
+          </Key>
+          <Property Name="exportid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productid" Type="int" />
+          <Property Name="exportdate" Type="date" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="exporter" Type="nvarchar" MaxLength="50" />
+          <Property Name="destination" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="importproduct">
+          <Key>
+            <PropertyRef Name="importid" />
+          </Key>
+          <Property Name="importid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productid" Type="int" />
+          <Property Name="importdate" Type="date" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="importer" Type="nvarchar" MaxLength="50" />
+          <Property Name="source" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="orderdetails">
+          <Key>
+            <PropertyRef Name="orderdetailid" />
+          </Key>
+          <Property Name="orderdetailid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderid" Type="bigint" />
+          <Property Name="productid" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="totalprice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="payment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orderp">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="bigint" Nullable="false" />
+          <Property Name="barcode" Type="varbinary(max)" />
+          <Property Name="staffid" Type="bigint" Nullable="false" />
+          <Property Name="paycustomerid" Type="int" Nullable="false" />
+          <Property Name="orderdate" Type="datetime" />
+          <Property Name="number" Type="int" />
+          <Property Name="totalamount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="discountused" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="payment_methods">
+          <Key>
+            <PropertyRef Name="payment_method_id" />
+          </Key>
+          <Property Name="payment_method_id" Type="int" Nullable="false" />
+          <Property Name="payment_method_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productid" />
+          </Key>
+          <Property Name="productid" Type="int" Nullable="false" />
+          <Property Name="productname" Type="nvarchar(max)" />
+          <Property Name="categoryid" Type="int" />
+          <Property Name="barcode" Type="varbinary(max)" />
+          <Property Name="imgpath" Type="varbinary(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="unitprice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="quantityinstock" Type="int" />
+          <Property Name="publishing_company" Type="nvarchar(max)" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar(max)" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="update_by" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="roleid" Type="int" Nullable="false" />
+          <Property Name="rolename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="shelfmanage">
+          <Key>
+            <PropertyRef Name="shelfmanageid" />
+          </Key>
+          <Property Name="shelfmanageid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productid" Type="int" />
+          <Property Name="shelfid" Type="int" />
+          <Property Name="quantityinshelf" Type="int" />
+          <Property Name="productname" Type="nvarchar(max)" />
+          <Property Name="shelfname" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="shift">
+          <Key>
+            <PropertyRef Name="shiftid" />
+          </Key>
+          <Property Name="shiftid" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hesoluong" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="avatar" Type="varbinary(max)" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="date_of_birth" Type="date" />
+          <Property Name="sex" Type="nvarchar" MaxLength="10" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="cccd" Type="nvarchar" MaxLength="20" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="role_id" Type="int" />
+          <Property Name="shift_id" Type="int" />
+          <Property Name="luongcoban" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="active" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Discount__custom__73BA3083">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="discount" Type="Self.discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerid" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Discount__discou__74AE54BC">
+          <End Role="discount_type" Type="Self.discount_type" Multiplicity="0..1" />
+          <End Role="discount" Type="Self.discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount_type">
+              <PropertyRef Name="discount_type_id" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="discount_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Discount__produc__72C60C4A">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="discount" Type="Self.discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExportPro__produ__6B24EA82">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="exportproduct" Type="Self.exportproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="exportproduct">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImportPro__produ__6E01572D">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="importproduct" Type="Self.importproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="importproduct">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orderdeta__order__09A971A2">
+          <End Role="orderp" Type="Self.orderp" Multiplicity="0..1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orderp">
+              <PropertyRef Name="orderid" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="orderid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orderdeta__produ__0A9D95DB">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orderp__staffid__06CD04F7">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="orderp" Type="Self.orderp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderp">
+              <PropertyRef Name="staffid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__staff__role_id__02FC7413">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__staff__shift_id__03F0984C">
+          <End Role="shift" Type="Self.shift" Multiplicity="0..1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="shiftid" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookshelf">
+          <End Role="bookshelf" Type="Self.bookshelf" Multiplicity="0..1" />
+          <End Role="shelfmanage" Type="Self.shelfmanage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bookshelf">
+              <PropertyRef Name="shelfid" />
+            </Principal>
+            <Dependent Role="shelfmanage">
+              <PropertyRef Name="shelfid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderdetails_payments">
+          <End Role="payment_methods" Type="Self.payment_methods" Multiplicity="1" />
+          <End Role="orderdetails" Type="Self.orderdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_methods">
+              <PropertyRef Name="payment_method_id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="payment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderp_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="orderp" Type="Self.orderp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerid" />
+            </Principal>
+            <Dependent Role="orderp">
+              <PropertyRef Name="paycustomerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="shelfmanage" Type="Self.shelfmanage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="shelfmanage">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_product_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="categoryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookShopModelStoreContainer">
+          <EntitySet Name="bookshelf" EntityType="Self.bookshelf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="discount" EntityType="Self.discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="discount_type" EntityType="Self.discount_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="exportproduct" EntityType="Self.exportproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="importproduct" EntityType="Self.importproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orderdetails" EntityType="Self.orderdetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orderp" EntityType="Self.orderp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment_methods" EntityType="Self.payment_methods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shelfmanage" EntityType="Self.shelfmanage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shift" EntityType="Self.shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Discount__custom__73BA3083" Association="Self.FK__Discount__custom__73BA3083">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="discount" EntitySet="discount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Discount__discou__74AE54BC" Association="Self.FK__Discount__discou__74AE54BC">
+            <End Role="discount_type" EntitySet="discount_type" />
+            <End Role="discount" EntitySet="discount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Discount__produc__72C60C4A" Association="Self.FK__Discount__produc__72C60C4A">
+            <End Role="product" EntitySet="product" />
+            <End Role="discount" EntitySet="discount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExportPro__produ__6B24EA82" Association="Self.FK__ExportPro__produ__6B24EA82">
+            <End Role="product" EntitySet="product" />
+            <End Role="exportproduct" EntitySet="exportproduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImportPro__produ__6E01572D" Association="Self.FK__ImportPro__produ__6E01572D">
+            <End Role="product" EntitySet="product" />
+            <End Role="importproduct" EntitySet="importproduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orderdeta__order__09A971A2" Association="Self.FK__orderdeta__order__09A971A2">
+            <End Role="orderp" EntitySet="orderp" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orderdeta__produ__0A9D95DB" Association="Self.FK__orderdeta__produ__0A9D95DB">
+            <End Role="product" EntitySet="product" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orderp__staffid__06CD04F7" Association="Self.FK__orderp__staffid__06CD04F7">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="orderp" EntitySet="orderp" />
+          </AssociationSet>
+          <AssociationSet Name="FK__staff__role_id__02FC7413" Association="Self.FK__staff__role_id__02FC7413">
+            <End Role="role" EntitySet="role" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__staff__shift_id__03F0984C" Association="Self.FK__staff__shift_id__03F0984C">
+            <End Role="shift" EntitySet="shift" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookshelf" Association="Self.FK_Bookshelf">
+            <End Role="bookshelf" EntitySet="bookshelf" />
+            <End Role="shelfmanage" EntitySet="shelfmanage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderdetails_payments" Association="Self.FK_orderdetails_payments">
+            <End Role="payment_methods" EntitySet="payment_methods" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderp_customer" Association="Self.FK_orderp_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="orderp" EntitySet="orderp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+            <End Role="product" EntitySet="product" />
+            <End Role="shelfmanage" EntitySet="shelfmanage" />
+          </AssociationSet>
+          <AssociationSet Name="fk_product_category" Association="Self.fk_product_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BookShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="category_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="products" Relationship="Self.fk_product_category" FromRole="category" ToRole="product" />
+        </EntityType>
+        <EntityType Name="discount_type">
+          <Key>
+            <PropertyRef Name="discount_type_id" />
+          </Key>
+          <Property Name="discount_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="discounts" Relationship="BookShopModel.FK__Discount__discou__74AE54BC" FromRole="discount_type" ToRole="discount" />
+        </EntityType>
+        <EntityType Name="exportproduct">
+          <Key>
+            <PropertyRef Name="exportid" />
+          </Key>
+          <Property Name="exportid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productid" Type="Int32" />
+          <Property Name="exportdate" Type="DateTime" Precision="0" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="exporter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="destination" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="product" Relationship="Self.FK__ExportPro__produ__6B24EA82" FromRole="exportproduct" ToRole="product" />
+        </EntityType>
+        <EntityType Name="importproduct">
+          <Key>
+            <PropertyRef Name="importid" />
+          </Key>
+          <Property Name="importid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productid" Type="Int32" />
+          <Property Name="importdate" Type="DateTime" Precision="0" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="importer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="source" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="product" Relationship="Self.FK__ImportPro__produ__6E01572D" FromRole="importproduct" ToRole="product" />
+        </EntityType>
+        <EntityType Name="orderdetail">
+          <Key>
+            <PropertyRef Name="orderdetailid" />
+          </Key>
+          <Property Name="orderdetailid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderid" Type="Int64" />
+          <Property Name="productid" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalprice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="payment" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="product" Relationship="Self.FK__orderdeta__produ__0A9D95DB" FromRole="orderdetails" ToRole="product" />
+          <NavigationProperty Name="payment_methods" Relationship="Self.FK_orderdetails_payments" FromRole="orderdetails" ToRole="payment_methods" />
+          <NavigationProperty Name="orderp" Relationship="BookShopModel.FK__orderdeta__order__09A971A2" FromRole="orderdetail" ToRole="orderp" />
+        </EntityType>
+        <EntityType Name="payment_methods">
+          <Key>
+            <PropertyRef Name="payment_method_id" />
+          </Key>
+          <Property Name="payment_method_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_method_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="orderdetails" Relationship="Self.FK_orderdetails_payments" FromRole="payment_methods" ToRole="orderdetails" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productid" />
+          </Key>
+          <Property Name="productid" Type="Int32" Nullable="false" />
+          <Property Name="productname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="categoryid" Type="Int32" />
+          <Property Name="barcode" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="imgpath" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="unitprice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="quantityinstock" Type="Int32" />
+          <Property Name="publishing_company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="category" Relationship="Self.fk_product_category" FromRole="product" ToRole="category" />
+          <NavigationProperty Name="exportproducts" Relationship="Self.FK__ExportPro__produ__6B24EA82" FromRole="product" ToRole="exportproduct" />
+          <NavigationProperty Name="importproducts" Relationship="Self.FK__ImportPro__produ__6E01572D" FromRole="product" ToRole="importproduct" />
+          <NavigationProperty Name="orderdetails" Relationship="Self.FK__orderdeta__produ__0A9D95DB" FromRole="product" ToRole="orderdetails" />
+          <NavigationProperty Name="shelfmanages" Relationship="BookShopModel.FK_Product" FromRole="product" ToRole="shelfmanage" />
+          <NavigationProperty Name="discounts" Relationship="BookShopModel.FK__Discount__produc__72C60C4A" FromRole="product" ToRole="discount" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="roleid" Type="Int32" Nullable="false" />
+          <Property Name="rolename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="staffs" Relationship="BookShopModel.FK__staff__role_id__02FC7413" FromRole="role" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="shift">
+          <Key>
+            <PropertyRef Name="shiftid" />
+          </Key>
+          <Property Name="shiftid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hesoluong" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="staffs" Relationship="BookShopModel.FK__staff__shift_id__03F0984C" FromRole="shift" ToRole="staff" />
+        </EntityType>
+        <Association Name="fk_product_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="categoryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ExportPro__produ__6B24EA82">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="exportproduct" Type="Self.exportproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="exportproduct">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImportPro__produ__6E01572D">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="importproduct" Type="Self.importproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="importproduct">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orderdeta__produ__0A9D95DB">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="orderdetails" Type="Self.orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orderdetails_payments">
+          <End Role="payment_methods" Type="Self.payment_methods" Multiplicity="1" />
+          <End Role="orderdetails" Type="Self.orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_methods">
+              <PropertyRef Name="payment_method_id" />
+            </Principal>
+            <Dependent Role="orderdetails">
+              <PropertyRef Name="payment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookShopEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="discount_type" EntityType="Self.discount_type" />
+          <EntitySet Name="exportproducts" EntityType="Self.exportproduct" />
+          <EntitySet Name="importproducts" EntityType="Self.importproduct" />
+          <EntitySet Name="orderdetails" EntityType="Self.orderdetail" />
+          <EntitySet Name="payment_methods" EntityType="Self.payment_methods" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="shifts" EntityType="Self.shift" />
+          <AssociationSet Name="fk_product_category" Association="Self.fk_product_category">
+            <End Role="category" EntitySet="categories" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ExportPro__produ__6B24EA82" Association="Self.FK__ExportPro__produ__6B24EA82">
+            <End Role="product" EntitySet="products" />
+            <End Role="exportproduct" EntitySet="exportproducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImportPro__produ__6E01572D" Association="Self.FK__ImportPro__produ__6E01572D">
+            <End Role="product" EntitySet="products" />
+            <End Role="importproduct" EntitySet="importproducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orderdeta__produ__0A9D95DB" Association="Self.FK__orderdeta__produ__0A9D95DB">
+            <End Role="product" EntitySet="products" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orderdetails_payments" Association="Self.FK_orderdetails_payments">
+            <End Role="payment_methods" EntitySet="payment_methods" />
+            <End Role="orderdetails" EntitySet="orderdetails" />
+          </AssociationSet>
+          <EntitySet Name="orderps" EntityType="BookShopModel.orderp" />
+          <AssociationSet Name="FK__orderdeta__order__09A971A2" Association="BookShopModel.FK__orderdeta__order__09A971A2">
+            <End Role="orderp" EntitySet="orderps" />
+            <End Role="orderdetail" EntitySet="orderdetails" />
+          </AssociationSet>
+          <EntitySet Name="customers" EntityType="BookShopModel.customer" />
+          <AssociationSet Name="FK_orderp_customer" Association="BookShopModel.FK_orderp_customer">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="orderp" EntitySet="orderps" />
+          </AssociationSet>
+          <EntitySet Name="staffs" EntityType="BookShopModel.staff" />
+          <AssociationSet Name="FK__orderp__staffid__06CD04F7" Association="BookShopModel.FK__orderp__staffid__06CD04F7">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="orderp" EntitySet="orderps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__staff__role_id__02FC7413" Association="BookShopModel.FK__staff__role_id__02FC7413">
+            <End Role="role" EntitySet="roles" />
+            <End Role="staff" EntitySet="staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__staff__shift_id__03F0984C" Association="BookShopModel.FK__staff__shift_id__03F0984C">
+            <End Role="shift" EntitySet="shifts" />
+            <End Role="staff" EntitySet="staffs" />
+          </AssociationSet>
+          <EntitySet Name="bookshelves" EntityType="BookShopModel.bookshelf" />
+          <EntitySet Name="shelfmanages" EntityType="BookShopModel.shelfmanage" />
+          <AssociationSet Name="FK_Bookshelf" Association="BookShopModel.FK_Bookshelf">
+            <End Role="bookshelf" EntitySet="bookshelves" />
+            <End Role="shelfmanage" EntitySet="shelfmanages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product" Association="BookShopModel.FK_Product">
+            <End Role="product" EntitySet="products" />
+            <End Role="shelfmanage" EntitySet="shelfmanages" />
+          </AssociationSet>
+          <EntitySet Name="discounts" EntityType="BookShopModel.discount" />
+          <AssociationSet Name="FK__Discount__custom__73BA3083" Association="BookShopModel.FK__Discount__custom__73BA3083">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="discount" EntitySet="discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Discount__discou__74AE54BC" Association="BookShopModel.FK__Discount__discou__74AE54BC">
+            <End Role="discount_type" EntitySet="discount_type" />
+            <End Role="discount" EntitySet="discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Discount__produc__72C60C4A" Association="BookShopModel.FK__Discount__produc__72C60C4A">
+            <End Role="product" EntitySet="products" />
+            <End Role="discount" EntitySet="discounts" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="orderp">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="Int64" Nullable="false" />
+          <Property Name="barcode" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="staffid" Type="Int64" Nullable="false" />
+          <Property Name="paycustomerid" Type="Int32" Nullable="false" />
+          <Property Name="orderdate" Type="DateTime" Precision="3" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="totalamount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="discountused" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="orderdetails" Relationship="BookShopModel.FK__orderdeta__order__09A971A2" FromRole="orderp" ToRole="orderdetail" />
+          <NavigationProperty Name="customer" Relationship="BookShopModel.FK_orderp_customer" FromRole="orderp" ToRole="customer" />
+          <NavigationProperty Name="staff" Relationship="BookShopModel.FK__orderp__staffid__06CD04F7" FromRole="orderp" ToRole="staff" />
+        </EntityType>
+        <Association Name="FK__orderdeta__order__09A971A2">
+          <End Type="BookShopModel.orderp" Role="orderp" Multiplicity="0..1" />
+          <End Type="BookShopModel.orderdetail" Role="orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orderp">
+              <PropertyRef Name="orderid" />
+            </Principal>
+            <Dependent Role="orderdetail">
+              <PropertyRef Name="orderid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerid" />
+          </Key>
+          <Property Name="customerid" Type="Int32" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="point" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="returncount" Type="Int32" />
+          <Property Name="datein" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="orderps" Relationship="BookShopModel.FK_orderp_customer" FromRole="customer" ToRole="orderp" />
+          <NavigationProperty Name="discounts" Relationship="BookShopModel.FK__Discount__custom__73BA3083" FromRole="customer" ToRole="discount" />
+        </EntityType>
+        <Association Name="FK_orderp_customer">
+          <End Type="BookShopModel.customer" Role="customer" Multiplicity="1" />
+          <End Type="BookShopModel.orderp" Role="orderp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerid" />
+            </Principal>
+            <Dependent Role="orderp">
+              <PropertyRef Name="paycustomerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cccd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="role_id" Type="Int32" />
+          <Property Name="shift_id" Type="Int32" />
+          <Property Name="luongcoban" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="active" Type="Boolean" />
+          <NavigationProperty Name="orderps" Relationship="BookShopModel.FK__orderp__staffid__06CD04F7" FromRole="staff" ToRole="orderp" />
+          <NavigationProperty Name="role" Relationship="BookShopModel.FK__staff__role_id__02FC7413" FromRole="staff" ToRole="role" />
+          <NavigationProperty Name="shift" Relationship="BookShopModel.FK__staff__shift_id__03F0984C" FromRole="staff" ToRole="shift" />
+        </EntityType>
+        <Association Name="FK__orderp__staffid__06CD04F7">
+          <End Type="BookShopModel.staff" Role="staff" Multiplicity="1" />
+          <End Type="BookShopModel.orderp" Role="orderp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderp">
+              <PropertyRef Name="staffid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__staff__role_id__02FC7413">
+          <End Type="BookShopModel.role" Role="role" Multiplicity="0..1" />
+          <End Type="BookShopModel.staff" Role="staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__staff__shift_id__03F0984C">
+          <End Type="BookShopModel.shift" Role="shift" Multiplicity="0..1" />
+          <End Type="BookShopModel.staff" Role="staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shift">
+              <PropertyRef Name="shiftid" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="bookshelf">
+          <Key>
+            <PropertyRef Name="shelfid" />
+          </Key>
+          <Property Name="shelfid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shelfname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shelfdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="shelfmanages" Relationship="BookShopModel.FK_Bookshelf" FromRole="bookshelf" ToRole="shelfmanage" />
+        </EntityType>
+        <EntityType Name="shelfmanage">
+          <Key>
+            <PropertyRef Name="shelfmanageid" />
+          </Key>
+          <Property Name="shelfmanageid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productid" Type="Int32" />
+          <Property Name="shelfid" Type="Int32" />
+          <Property Name="quantityinshelf" Type="Int32" />
+          <Property Name="productname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="shelfname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="bookshelf" Relationship="BookShopModel.FK_Bookshelf" FromRole="shelfmanage" ToRole="bookshelf" />
+          <NavigationProperty Name="product" Relationship="BookShopModel.FK_Product" FromRole="shelfmanage" ToRole="product" />
+        </EntityType>
+        <Association Name="FK_Bookshelf">
+          <End Type="BookShopModel.bookshelf" Role="bookshelf" Multiplicity="0..1" />
+          <End Type="BookShopModel.shelfmanage" Role="shelfmanage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bookshelf">
+              <PropertyRef Name="shelfid" />
+            </Principal>
+            <Dependent Role="shelfmanage">
+              <PropertyRef Name="shelfid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product">
+          <End Type="BookShopModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="BookShopModel.shelfmanage" Role="shelfmanage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="shelfmanage">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="discount_id" />
+          </Key>
+          <Property Name="discount_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="min_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="apply_count" Type="Int32" />
+          <Property Name="discount_amount" Type="Decimal" Precision="3" Scale="3" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="discount_type_id" Type="Int32" />
+          <Property Name="start_date" Type="DateTime" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <Property Name="condition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="out_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="customer" Relationship="BookShopModel.FK__Discount__custom__73BA3083" FromRole="discount" ToRole="customer" />
+          <NavigationProperty Name="discount_type" Relationship="BookShopModel.FK__Discount__discou__74AE54BC" FromRole="discount" ToRole="discount_type" />
+          <NavigationProperty Name="product" Relationship="BookShopModel.FK__Discount__produc__72C60C4A" FromRole="discount" ToRole="product" />
+        </EntityType>
+        <Association Name="FK__Discount__custom__73BA3083">
+          <End Type="BookShopModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="BookShopModel.discount" Role="discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerid" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Discount__discou__74AE54BC">
+          <End Type="BookShopModel.discount_type" Role="discount_type" Multiplicity="0..1" />
+          <End Type="BookShopModel.discount" Role="discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount_type">
+              <PropertyRef Name="discount_type_id" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="discount_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Discount__produc__72C60C4A">
+          <End Type="BookShopModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="BookShopModel.discount" Role="discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productid" />
+            </Principal>
+            <Dependent Role="discount">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BookShopModelStoreContainer" CdmEntityContainer="BookShopEntities3">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="BookShopModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discount_type">
+            <EntityTypeMapping TypeName="BookShopModel.discount_type">
+              <MappingFragment StoreEntitySet="discount_type">
+                <ScalarProperty Name="discount_type_id" ColumnName="discount_type_id" />
+                <ScalarProperty Name="type_name" ColumnName="type_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="exportproducts">
+            <EntityTypeMapping TypeName="BookShopModel.exportproduct">
+              <MappingFragment StoreEntitySet="exportproduct">
+                <ScalarProperty Name="exportid" ColumnName="exportid" />
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="exportdate" ColumnName="exportdate" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="exporter" ColumnName="exporter" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="importproducts">
+            <EntityTypeMapping TypeName="BookShopModel.importproduct">
+              <MappingFragment StoreEntitySet="importproduct">
+                <ScalarProperty Name="importid" ColumnName="importid" />
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="importdate" ColumnName="importdate" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="importer" ColumnName="importer" />
+                <ScalarProperty Name="source" ColumnName="source" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderdetails">
+            <EntityTypeMapping TypeName="BookShopModel.orderdetail">
+              <MappingFragment StoreEntitySet="orderdetails">
+                <ScalarProperty Name="orderdetailid" ColumnName="orderdetailid" />
+                <ScalarProperty Name="orderid" ColumnName="orderid" />
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment_methods">
+            <EntityTypeMapping TypeName="BookShopModel.payment_methods">
+              <MappingFragment StoreEntitySet="payment_methods">
+                <ScalarProperty Name="payment_method_id" ColumnName="payment_method_id" />
+                <ScalarProperty Name="payment_method_name" ColumnName="payment_method_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="BookShopModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="productname" ColumnName="productname" />
+                <ScalarProperty Name="categoryid" ColumnName="categoryid" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="imgpath" ColumnName="imgpath" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="unitprice" ColumnName="unitprice" />
+                <ScalarProperty Name="quantityinstock" ColumnName="quantityinstock" />
+                <ScalarProperty Name="publishing_company" ColumnName="publishing_company" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="BookShopModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shifts">
+            <EntityTypeMapping TypeName="BookShopModel.shift">
+              <MappingFragment StoreEntitySet="shift">
+                <ScalarProperty Name="shiftid" ColumnName="shiftid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="hesoluong" ColumnName="hesoluong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderps">
+            <EntityTypeMapping TypeName="BookShopModel.orderp">
+              <MappingFragment StoreEntitySet="orderp">
+                <ScalarProperty Name="discountused" ColumnName="discountused" />
+                <ScalarProperty Name="totalamount" ColumnName="totalamount" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+                <ScalarProperty Name="paycustomerid" ColumnName="paycustomerid" />
+                <ScalarProperty Name="staffid" ColumnName="staffid" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="orderid" ColumnName="orderid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="BookShopModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="datein" ColumnName="datein" />
+                <ScalarProperty Name="returncount" ColumnName="returncount" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffs">
+            <EntityTypeMapping TypeName="BookShopModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="luongcoban" ColumnName="luongcoban" />
+                <ScalarProperty Name="shift_id" ColumnName="shift_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="cccd" ColumnName="cccd" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bookshelves">
+            <EntityTypeMapping TypeName="BookShopModel.bookshelf">
+              <MappingFragment StoreEntitySet="bookshelf">
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="shelfdescription" ColumnName="shelfdescription" />
+                <ScalarProperty Name="shelfname" ColumnName="shelfname" />
+                <ScalarProperty Name="shelfid" ColumnName="shelfid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shelfmanages">
+            <EntityTypeMapping TypeName="BookShopModel.shelfmanage">
+              <MappingFragment StoreEntitySet="shelfmanage">
+                <ScalarProperty Name="shelfname" ColumnName="shelfname" />
+                <ScalarProperty Name="productname" ColumnName="productname" />
+                <ScalarProperty Name="quantityinshelf" ColumnName="quantityinshelf" />
+                <ScalarProperty Name="shelfid" ColumnName="shelfid" />
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="shelfmanageid" ColumnName="shelfmanageid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discounts">
+            <EntityTypeMapping TypeName="BookShopModel.discount">
+              <MappingFragment StoreEntitySet="discount">
+                <ScalarProperty Name="out_date" ColumnName="out_date" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="condition" ColumnName="condition" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="discount_type_id" ColumnName="discount_type_id" />
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="discount_amount" ColumnName="discount_amount" />
+                <ScalarProperty Name="apply_count" ColumnName="apply_count" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="min_amount" ColumnName="min_amount" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="discount_id" ColumnName="discount_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
