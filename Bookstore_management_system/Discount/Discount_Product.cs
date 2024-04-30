@@ -246,5 +246,121 @@ namespace Bookstore_management_system.Discount
         {
             RefeshUI();
         }
+
+        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = guna2DataGridView1.Rows[e.RowIndex];
+                string discountID = row.Cells["Column1"].Value?.ToString();
+                if (!string.IsNullOrEmpty(discountID))
+                {
+                    var discount = (from d in context.discounts
+                                    where d.discount_id == discountID // Lọc mã giảm giá theo ID
+                                    select d).FirstOrDefault(); // Lấy mã giảm giá đầu tiên hoặc null nếu không tìm thấy
+
+                    if (discount != null)
+                    {
+                        // Hiển thị thông tin mã giảm giá trong các điều khiển trên giao diện
+                        guna2ComboBox1.Text = discount.discount_type.type_name;
+                        TextBoxPhantramck.Text = (discount.discount_amount * 100).ToString();
+                        txtNote.Text = discount.apply_count.ToString();
+                        TextboxMucchi.Text = discount.min_amount.ToString();
+                        pickerstart.Value = discount.start_date ?? DateTime.Now;
+                        pickerend.Value = discount.end_date ?? DateTime.Now;
+
+                        if (discount.discount_type_id == 3)
+                        {
+                            guna2DateTimePicker1_od.Value = discount.out_date ?? DateTime.Now;
+                        }
+
+                        if (discount.discount_type_id == 5)
+                        {
+                            guna2TextBox_point.Text = discount.condition;
+                        }
+                    }
+                    else
+                    {
+                        // Xử lý khi không tìm thấy mã giảm giá
+                    }
+                }
+            }
+        }
+
+        private void guna2ButtonUpdate_Click(object sender, EventArgs e)
+        {
+            if (guna2DataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = guna2DataGridView1.SelectedRows[0];
+                string discountID = row.Cells["Column1"].Value?.ToString();
+                if (!string.IsNullOrEmpty(discountID))
+                {
+                    var discount = context.discounts.FirstOrDefault(d => d.discount_id == discountID);
+                    if (discount != null)
+                    {
+                        discount.discount_type_id = Convert.ToInt32(guna2ComboBox1.SelectedValue);
+                        discount.discount_amount = decimal.Parse(TextBoxPhantramck.Text) / 100;
+                        discount.apply_count = int.Parse(txtNote.Text);
+                        discount.min_amount = decimal.Parse(TextboxMucchi.Text);
+                        discount.start_date = pickerstart.Value;
+                        discount.end_date = pickerend.Value;
+
+                        if (discount.discount_type_id == 3)
+                        {
+                            discount.out_date = guna2DateTimePicker1_od.Value;
+                        }
+
+                        if (discount.discount_type_id == 5)
+                        {
+                            discount.condition = guna2TextBox_point.Text;
+                        }
+
+                        context.SaveChanges();
+                        MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadDataGridViewDiscount();
+                        RefeshUI();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn một mã giảm giá để cập nhật.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void DiscountSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = DiscountSearch.Text.ToLower();  // Lấy văn bản từ TextBox và chuyển thành chữ thường để tìm kiếm không phân biệt hoa thường.
+            LoadFilteredDiscounts(searchText);  // Tải lại danh sách giảm giá dựa trên từ khóa tìm kiếm.
+        }
+
+        private void LoadFilteredDiscounts(string searchText)
+        {
+            var filteredData = context.discounts.Where(
+                d => d.discount_id.ToLower().Contains(searchText) ||  // Tìm kiếm theo ID giảm giá.
+                     d.discount_type.type_name.ToLower().Contains(searchText)  // Tìm kiếm theo tên loại giảm giá.
+            ).ToList();
+
+            UpdateDataGridView(filteredData);  // Cập nhật DataGridView với dữ liệu đã lọc.
+        }
+
+        private void UpdateDataGridView(List<discount> discounts)
+        {
+            guna2DataGridView1.Rows.Clear();  // Xóa các hàng hiện tại trong DataGridView.
+
+            foreach (var discount in discounts)
+            {
+                string endDate = discount.end_date.HasValue ? discount.end_date.Value.ToShortDateString() : ""; // Kiểm tra giá trị null trước khi gọi phương thức.
+
+                guna2DataGridView1.Rows.Add(
+                    discount.discount_id,
+                    discount.discount_type.type_name,
+                    (discount.discount_amount * 100).ToString() + "%",
+                    discount.apply_count,
+                    discount.min_amount,
+                    endDate // Sử dụng biến endDate đã kiểm tra null.
+                );
+            }
+        }
     }
 }
