@@ -78,104 +78,10 @@ namespace Bookstore_management_system.Discount
             }
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+/*        private void guna2Button2_Click(object sender, EventArgs e)
         {
-            DataRowView selectedRow1 = (DataRowView)guna2ComboBox1.SelectedItem;
-
-            if (selectedRow1 != null)
-            {
-                
-                int dis_type_id = Convert.ToInt32(selectedRow1["discount_type_id"]);
-                DateTime sDate = pickerstart.Value;
-                DateTime eDate = pickerend.Value;
-                decimal discPT = decimal.Parse(TextBoxPhantramck.Text);
-                decimal disc = (decimal)Math.Round(discPT / 100, 3);
-
-                decimal min_count = 0;
-                if (RadioNoGiatri.Checked)
-                {
-                    min_count = 0;
-                    TextboxMucchi.Visible = false;
-                }
-                else
-                {
-                    min_count = decimal.Parse(TextboxMucchi.Text);
-                }
-
-                int app_C = int.Parse(txtNote.Text);
-                string note_C = guna2TextBox1.Text;
-
-                long discountID = GenerateCustomerID(dis_type_id);
-
-                disAA += discountID.ToString();
-
-                DateTime oD = guna2DateTimePicker1_od.Value;
-                String point = guna2TextBox_point.Text;
-                if(dis_type_id == 2)
-                {
-                    var addDiscount = new discount
-                    {
-                        discount_id = disAA,
-                        apply_count = app_C,
-                        min_amount = min_count,
-                        start_date = sDate,
-                        end_date = eDate,
-                        note = note_C,
-                        discount_amount = disc,
-                        created_at = DateTime.Now,
-                        created_by = Properties.Settings.Default.NameStaff,
-                        discount_type_id = dis_type_id
-                    };
-
-                    context.discounts.Add(addDiscount);
-                }
-                else if(dis_type_id == 3)
-                {
-                    var addDiscount = new discount
-                    {
-                        discount_id = disAA,
-                        apply_count = app_C,
-                        min_amount = min_count,
-                        start_date = sDate,
-                        end_date = eDate,
-                        note = note_C,
-                        discount_amount = disc,
-                        created_at = DateTime.Now,
-                        created_by = Properties.Settings.Default.NameStaff,
-                        discount_type_id = dis_type_id,
-                        out_date = oD
-                       
-                    };
-
-                    context.discounts.Add(addDiscount);
-                }else if(dis_type_id == 5){
-
-                    var addDiscount = new discount
-                    {
-                        discount_id = disAA,
-                        apply_count = app_C,
-                        min_amount = min_count,
-                        start_date = sDate,
-                        end_date = eDate,
-                        note = note_C,
-                        discount_amount = disc,
-                        created_at = DateTime.Now,
-                        created_by = Properties.Settings.Default.NameStaff,
-                        discount_type_id = dis_type_id,
-                        condition = point
-
-                    };
-                }
-                else
-                {
-                    MessageBox.Show("Không thể thêm mới do loại giảm giá không được hỗ trợ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                context.SaveChanges();
-            }
-            RefeshUI();
-            LoadDataGridViewDiscount();
-        }
+           
+        }*/
 
 
         private void LoadDataGridViewDiscount()
@@ -361,6 +267,107 @@ namespace Bookstore_management_system.Discount
                     endDate // Sử dụng biến endDate đã kiểm tra null.
                 );
             }
+        }
+
+        private void guna2Button2_Click_1(object sender, EventArgs e)
+        {
+            DataRowView selectedRow1 = (DataRowView)guna2ComboBox1.SelectedItem;
+
+            if (selectedRow1 != null)
+            {
+
+                int dis_type_id = Convert.ToInt32(selectedRow1["discount_type_id"]);
+                DateTime sDate = pickerstart.Value;
+                DateTime eDate = pickerend.Value;
+                decimal discPT = decimal.Parse(TextBoxPhantramck.Text);
+                decimal disc = (decimal)Math.Round(discPT / 100, 3);
+
+                decimal min_count = 0;
+                if (RadioNoGiatri.Checked)
+                {
+                    min_count = 0;
+                    TextboxMucchi.Visible = false;
+                }
+                else
+                {
+                    min_count = decimal.Parse(TextboxMucchi.Text);
+                }
+
+                int app_C = int.Parse(txtNote.Text);
+                string note_C = guna2TextBox1.Text;
+
+                long discountID = GenerateCustomerID(dis_type_id);
+
+                disAA += discountID.ToString();
+
+                DateTime oD = guna2DateTimePicker1_od.Value;
+                String point = guna2TextBox_point.Text;
+                if (dis_type_id == 2)
+                {
+                    var addDiscount = new discount
+                    {
+                        discount_id = disAA,
+                        apply_count = app_C,
+                        min_amount = min_count,
+                        start_date = sDate,
+                        end_date = eDate,
+                        note = note_C,
+                        discount_amount = disc,
+                        created_at = DateTime.Now,
+                        created_by = Properties.Settings.Default.NameStaff,
+                        discount_type_id = dis_type_id
+                    };
+
+                    context.discounts.Add(addDiscount);
+                }
+                else if (dis_type_id == 3)
+                {
+                    var addDiscount = new discount
+                    {
+                        discount_id = disAA,
+                        apply_count = app_C,
+                        min_amount = min_count,
+                        start_date = sDate,
+                        end_date = eDate,
+                        note = note_C,
+                        discount_amount = disc,
+                        created_at = DateTime.Now,
+                        created_by = Properties.Settings.Default.NameStaff,
+                        discount_type_id = dis_type_id,
+                        out_date = oD
+
+                    };
+
+                    context.discounts.Add(addDiscount);
+                }
+                else if (dis_type_id == 5)
+                {
+
+                    var addDiscount = new discount
+                    {
+                        discount_id = disAA,
+                        apply_count = app_C,
+                        min_amount = min_count,
+                        start_date = sDate,
+                        end_date = eDate,
+                        note = note_C,
+                        discount_amount = disc,
+                        created_at = DateTime.Now,
+                        created_by = Properties.Settings.Default.NameStaff,
+                        discount_type_id = dis_type_id,
+                        condition = point
+
+                    };
+                }
+                else
+                {
+                    MessageBox.Show("Không thể thêm mới do loại giảm giá không được hỗ trợ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                context.SaveChanges();
+            }
+            RefeshUI();
+            LoadDataGridViewDiscount();
         }
     }
 }

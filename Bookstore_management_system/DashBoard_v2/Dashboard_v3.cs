@@ -712,11 +712,18 @@ namespace Bookstore_management_system.DashBoard_v2
                             NotReturningCustomersCount = g.Count(c => c.datein < startDate && c.returncount == 1)
                         }).FirstOrDefault();
 
-                    customerCategoryCounts["Khách quay lại"] = customerStats.TotalCountReturn;
-                    customerCategoryCounts["Khách hàng thân thiết"] = customerStats.TotalCountClose;
-                    customerCategoryCounts["Khách hàng mới"] = customerStats.TotalCountNew;
-                    customerCategoryCounts["Khách không quay lại"] = customerStats.NotReturningCustomersCount;
-                    totalCus = customerStats.TotalCustomer;
+                    if (customerStats != null)
+                    {
+                        customerCategoryCounts["Khách quay lại"] = customerStats.TotalCountReturn;
+                        customerCategoryCounts["Khách hàng thân thiết"] = customerStats.TotalCountClose;
+                        customerCategoryCounts["Khách hàng mới"] = customerStats.TotalCountNew;
+                        customerCategoryCounts["Khách không quay lại"] = customerStats.NotReturningCustomersCount;
+                        totalCus = customerStats.TotalCustomer;
+                    }
+                    else
+                    {
+                        gunaChart4.Datasets.Clear();
+                    }
 
                     var listCustomerTop10 = context.customers.Where(c => c.point > 0 && c.returncount >= 5 && c.datein.Value.Month == monthCurrent && c.datein.Value.Year == yearCurrent)
                                             .Take(10)

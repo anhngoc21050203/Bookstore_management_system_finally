@@ -120,12 +120,6 @@
   <metadata name="discounttypeBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>186, 17</value>
   </metadata>
-  <metadata name="discounttypeBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>186, 17</value>
-  </metadata>
-  <metadata name="dataSetDiscount.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="dataSetDiscount.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -1121,7 +1115,7 @@
   <data name="DiscountSearch.IconRight" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        kAAAC5ABiBAx5gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAADwdSURBVHhe7d0J
+        jwAAC48Bt8qPNgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAADwdSURBVHhe7d0J
         /G3V/P/xc4fG2zxIRQOaaJLK1GCsCD8hUxEiEUk/IYpfhsz++CGZh0QZy1Ci6KeJEkUUSRo1IxqV//vj
         7ttdd9/3vX3P+Z5z1lr7vN6Px/M+6vP4/fRZ++y99rnn7LNW79///jcw8ZQZspI8ULaVJ8me8hp5m3xM
         viInyo/lDDlHfi0XyaVyldwgN8sdcrfcJn+X6+RKuUQulPPkbDlNTpHvy1HyYXmL7CfPlSfKVrKuLOd6

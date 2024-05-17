@@ -416,11 +416,11 @@ namespace Bookstore_management_system.Payment
                         label_customnew.Text = "Khách hàng đã tồn tại";
                         var discountForAllCustomers = from du in context.discounts
                                                       where du.discount_type_id == 2 &&
-                                                            du.min_amount <= totalPriceTemp &&
+                                                            du.min_amount <= totalPriceTemp && du.start_date <= dayNow && du.end_date >= dayNow &&
                                                             du.apply_count > 0
                                                       select du;
                         var discountForSpecificCustomer = from du in context.discounts
-                                                          where du.discount_type_id == 2 && du.customer_id == cusId &&
+                                                          where du.discount_type_id == 2 && du.customer_id == cusId && du.start_date <= dayNow && du.end_date >= dayNow &&
                                                             du.apply_count > 0
                                                           select du;
 
